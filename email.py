@@ -51,3 +51,14 @@ def ensure_unique_emails(df):
         emails.add(email)
         df.at[i, "Email Address"] = email
 
+# Ensure unique emails in both dataframes
+ensure_unique_emails(df1)
+ensure_unique_emails(df2)
+
+# Write back to the Excel file, updating the sheets
+with pd.ExcelWriter(file_path, mode="a", if_sheet_exists="replace") as writer:
+    df1.to_excel(writer, sheet_name=xls.sheet_names[0], index=False)
+    df2.to_excel(writer, sheet_name=xls.sheet_names[1], index=False)
+
+print("Email addresses generated and saved back to the Excel file.")
+
