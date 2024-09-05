@@ -14,3 +14,40 @@ def generate_email(name):
     # Remove special characters from the name (retain spaces and comma)
     name = re.sub(r"[^a-zA-Z\s,]", "", name)
 
+  # Split the name by comma
+    try:
+        last_name, first_name = [n.strip() for n in name.split(",")]
+    except ValueError:
+        return None  # Handle cases where the name doesn't have a comma
+
+    # Use the first letter of the first name after the comma and the last name before the comma
+    first_letter = first_name[0].lower() if first_name else ""
+    last_name = last_name.lower()
+
+    # Remove spaces and special characters from the last name
+    email_prefix = first_letter + re.sub(r"[^a-zA-Z]", "", last_name)
+
+    # Construct the email
+    email = f"{email_prefix}@gmail.com"
+
+    return email
+
+
+# Apply the function to both dataframes
+df1["Email Address"] = df1["Student Name"].apply(generate_email)
+df2["Email Address"] = df2["Student Name"].apply(generate_email)
+
+
+# Make sure the emails are unique
+def ensure_unique_emails(df):
+    emails = set()
+    for i, email in enumerate(df["Email Address"]):
+        original_email = email
+        counter = 1
+        # If the email is not unique, append a counter to make it unique
+        while email in emails:
+            email = f"{original_email.split('@')[0]}{counter}@gmail.com"
+            counter += 1
+        emails.add(email)
+        df.at[i, "Email Address"] = email
+
