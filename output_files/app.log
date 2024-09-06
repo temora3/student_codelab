@@ -1,0 +1,14 @@
+INFO:root:Number of male students: 40
+INFO:root:Number of female students: 24
+INFO:root:Number of male students: 40
+INFO:root:Number of female students: 24
+ERROR:root:The DataFrame does not contain 'First Name' or 'Last Name' columns.
+INFO:root:Number of male students: 40
+INFO:root:Number of female students: 24
+INFO:root:Number of male students: 40
+INFO:root:Number of female students: 24INFO:root:Number of male students: 35
+INFO:root:Number of female students: 24
+INFO:root:Number of male students: 75
+INFO:root:Number of female students: 48
+INFO:root:Number of male students: 75
+INFO:root:Number of female students: 48
