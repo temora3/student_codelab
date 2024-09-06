@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 # Load the Excel file with both sheets
-file_path = "D:/Projects/TestFiles.xlsx"  # Change this to your actual file path
+file_path = "inputFiles/test_files.xlsx"  # Change this to your actual file path
 xls = pd.ExcelFile(file_path)
 
 # Load both sheets into separate dataframes
