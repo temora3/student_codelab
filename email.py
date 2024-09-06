@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 # Load the Excel file with both sheets
-file_path = "D:/Projects/TestFiles.xlsx"  # Change this to your actual file path
+file_path = "D:\third year\3.2\Computer Graphics\PythonBasics\Test Files.xlsx"  # Change this to your actual file path
 xls = pd.ExcelFile(file_path)
 
 # Load both sheets into separate dataframes
@@ -62,3 +62,12 @@ with pd.ExcelWriter(file_path, mode="a", if_sheet_exists="replace") as writer:
 
 print("Email addresses generated and saved back to the Excel file.")
 
+# Merge the two dataframes
+all_students = pd.concat([df1, df2])
+
+# Save the merged dataframe to a new CSV file
+all_students.to_csv('all_students.csv', index=False)
+
+# Save the merged dataframe to a new TSV file
+all_students.to_csv('all_students.tsv', sep='\t', index=False)
+print("Dataframes merged and saved to CSV and TSV files.")
