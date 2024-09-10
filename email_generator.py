@@ -38,7 +38,7 @@ df1["Email Address"] = df1["Student Name"].apply(generate_email)
 df2["Email Address"] = df2["Student Name"].apply(generate_email)
 
 
-# Make sure the emails are unique
+# Makes sure the emails are unique
 def ensure_unique_emails(df):
     emails = set()
     for i, email in enumerate(df["Email Address"]):
