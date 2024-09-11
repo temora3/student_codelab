@@ -9,18 +9,17 @@ xls = pd.ExcelFile(file_path)
 df1 = pd.read_excel(xls, sheet_name=xls.sheet_names[0])
 df2 = pd.read_excel(xls, sheet_name=xls.sheet_names[1])
 
+
 # Function to generate email addresses
 def generate_email(name):
-    # Remove special characters from the name (retain spaces and comma)
-    name = re.sub(r"[^a-zA-Z\s,]", "", name)
 
-  # Split the name by comma
+    # Picks the name before and after the comma
     try:
         last_name, first_name = [n.strip() for n in name.split(",")]
     except ValueError:
         return None  # Handle cases where the name doesn't have a comma
 
-    # Use the first letter of the first name after the comma and the last name before the comma
+    # Uses the first letter of the first name after the comma and the name before the comma
     first_letter = first_name[0].lower() if first_name else ""
     last_name = last_name.lower()
 
@@ -51,6 +50,7 @@ def ensure_unique_emails(df):
         emails.add(email)
         df.at[i, "Email Address"] = email
 
+
 # Ensure unique emails in both dataframes
 ensure_unique_emails(df1)
 ensure_unique_emails(df2)
@@ -61,4 +61,3 @@ with pd.ExcelWriter(file_path, mode="a", if_sheet_exists="replace") as writer:
     df2.to_excel(writer, sheet_name=xls.sheet_names[1], index=False)
 
 print("Email addresses generated and saved back to the Excel file.")
-
