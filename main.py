@@ -55,7 +55,28 @@ def main():
     else:
         logging.error("The data source does not contain 'Student Name' column.")
 
+#Merge the male and femal students TSV files
+    male_students = pd.read_csv('male_students.tsv', sep='\t')
+    female_students = pd.read_csv('female_students.tsv', sep='\t')
+    
+    #Concatenate the data
+    all_students = pd.concat([male_students, female_students])
+    
+    # Reset the index
+    all_students.reset_index(drop=True, inplace=True)
 
+    # Shuffle the data
+    shuffled_students = all_students.sample(frac=1).reset_index(drop=True)
+
+    # Save as JSON file
+    shuffled_students.to_json('shuffled_students.json', orient='records')
+
+    # Save as JSONL file
+    with open('shuffled_students.jsonl', 'w') as f:
+        for index, row in shuffled_students.iterrows():
+            json.dump(row.to_dict(), f)
+            f.write('\n')
+            
 # Ensure the script is executed directly
 if _name_ == "_main_":
     main()

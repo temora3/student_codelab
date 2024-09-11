@@ -61,3 +61,13 @@ with pd.ExcelWriter(file_path, mode="a", if_sheet_exists="replace") as writer:
     df2.to_excel(writer, sheet_name=xls.sheet_names[1], index=False)
 
 print("Email addresses generated and saved back to the Excel file.")
+
+# Merge the two dataframes
+all_students = pd.concat([df1, df2])
+
+# Save the merged dataframe to a new CSV file
+all_students.to_csv('all_students.csv', index=False)
+
+# Save the merged dataframe to a new TSV file
+all_students.to_csv('all_students.tsv', sep='\t', index=False)
+print("Dataframes merged and saved to CSV and TSV files.")
